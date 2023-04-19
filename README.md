@@ -1,8 +1,8 @@
 # tap-zoom
 
-`tap-zoom` is a Singer tap for Zoom.
+`tap-zoom` is a Singer tap for [Zoom](https://zoom.com/).
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps and the [Zoom API Reference](https://developers.zoom.us/docs/api/)
 
 <!--
 
@@ -24,9 +24,6 @@ pipx install git+https://github.com/ORG_NAME/tap-zoom.git@main
 
 -->
 
-## Configuration
-
-### Accepted Config Options
 
 <!--
 Developer TODO: Provide a list of config options accepted by the tap.
@@ -38,11 +35,51 @@ tap-zoom --about --format=markdown
 ```
 -->
 
-A full list of supported settings and capabilities for this
-tap is available by running:
+## Capabilities
+
+* `catalog`
+* `state`
+* `discover`
+* `about`
+* `stream-maps`
+* `schema-flattening`
+
+## Settings
+
+| Setting             | Required | Default | Description |
+|:--------------------|:--------:|:-------:|:------------|
+| account_id          | True     | None    | The ID of the account. |
+| client_id           | True     | None    | The OAuth application's Client ID. |
+| client_secret       | True     | None    | The OAuth application's Client Secret. |
+| api_url             | False    | None    | Override the url for the API service. |
+| stream_config       | False    | None    | A list of dictionaries for specifing additional configurations for a specified stream. |
+
+A full list of supported settings and capabilities for this tap is available by running:
 
 ```bash
 tap-zoom --about
+```
+
+### Settings for Specific Streams
+
+Settings can be added on a per-stream basis and can be set using the stream_config setting. The stream_config setting takes a list of dictionaries, requiring the stream name as a value in the stream key. If the same stream name is added multiple times, only the last will be used.
+
+| Setting             | Required | Default | Description |
+|:--------------------|:--------:|:-------:|:------------|
+| stream              | True     | None    | Name of the stream to configure |
+| parameters          | False    | None    | URL query string to send to the stream endpoint |
+
+Example:
+
+```json
+{
+    "stream_config": [
+        {
+            "stream": "STREAM_NAME",
+            "parameters": "URL_QUERY_STRING"
+        }
+    ]
+}
 ```
 
 ### Configure using environment variables
@@ -127,5 +164,4 @@ meltano elt tap-zoom target-jsonl
 
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
-develop your own taps and targets.
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to develop your own taps and targets.

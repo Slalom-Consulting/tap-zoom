@@ -19,33 +19,21 @@ class TapZoom(Tap):
             th.StringType,
             required=True,
             secret=False,
-            description="The token to authenticate against the API service",
+            description="The ID of the account.",
         ),
         th.Property(
             "client_id",
             th.StringType,
             required=True,
             secret=False,
-            description="OAuth application's Development or Production Client ID.",
+            description="The OAuth application's Client ID.",
         ),
         th.Property(
             "client_secret",
             th.StringType,
             required=True,
             secret=True,
-            description="The token to authenticate against the API service",
-        ),
-        th.Property(
-            "page_limit",
-            th.IntegerType,
-            default=300,
-            description="The response limit for paginated streams.",
-        ),
-        th.Property(
-            "auth_expiration",
-            th.IntegerType,
-            default=300,
-            description="",
+            description="The OAuth application's Client Secret.",
         ),
         th.Property(
             "api_url",
@@ -71,6 +59,8 @@ class TapZoom(Tap):
                     ),
                 ),
             ),
+            description="A list of dictionaries for specifing additional \
+            configurations for a specified stream.",
         ),
     ).to_dict()
 
