@@ -32,7 +32,6 @@ class ZoomStream(RESTStream):
         Returns:
             An authenticator instance.
         """
-        # expiration = self.config.get("auth_expiration")
         return ZoomOAuthAuthenticator(self)
 
     @property
