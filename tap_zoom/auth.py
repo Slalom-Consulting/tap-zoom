@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 # import jwt
-from singer_sdk.authenticators import OAuthAuthenticator
+from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
 
 # from singer_sdk.helpers._util import utc_now
 # from singer_sdk.streams import Stream as RESTStreamBase
@@ -45,7 +45,7 @@ AUTH_URL = "https://zoom.us/oauth/token"
 #        self.last_refreshed = request_time
 
 
-class ZoomOAuthAuthenticator(OAuthAuthenticator):
+class ZoomOAuthAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
     @property
     def auth_endpoint(self) -> str:
         return self.config.get("auth_url", AUTH_URL)
