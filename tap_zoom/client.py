@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 from urllib.parse import parse_qsl
 
-# from singer_sdk.pagination import JSONPathPaginator
+from memoization import cached
 from singer_sdk.pagination import BaseAPIPaginator
 from singer_sdk.streams import RESTStream
 
@@ -25,6 +25,7 @@ class ZoomStream(RESTStream):
         return self.config.get("api_url", DEFAULT_URL)
 
     @property
+    @cached  # type: ignore
     def authenticator(self) -> ZoomOAuthAuthenticator:
         """Return a new authenticator object.
 
