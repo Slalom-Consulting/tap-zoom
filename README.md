@@ -13,27 +13,22 @@ Developer TODO: Update the below as needed to correctly describe the install pro
 Install from PyPi:
 
 ```bash
-pipx install tap-zoom
+pipx install tap-adobe-umapi
 ```
 
 Install from GitHub:
 
 ```bash
-pipx install git+https://github.com/ORG_NAME/tap-zoom.git@main
+pipx install git+https://github.com/ORG_NAME/tap-adobe-umapi.git@main
 ```
 
 -->
 
+Install from GitHub:
 
-<!--
-Developer TODO: Provide a list of config options accepted by the tap.
-
-This section can be created by copy-pasting the CLI output from:
-
+```bash
+pipx install git+https://github.com/Slalom-Consulting/tap-zoom.git@main
 ```
-tap-zoom --about --format=markdown
-```
--->
 
 ## Capabilities
 
@@ -44,7 +39,19 @@ tap-zoom --about --format=markdown
 * `stream-maps`
 * `schema-flattening`
 
-## Settings
+## Configuration
+
+### Accepted Config Options
+
+<!--
+Developer TODO: Provide a list of config options accepted by the tap.
+
+This section can be created by copy-pasting the CLI output from:
+
+```
+tap-adobe-umapi --about --format=markdown
+```
+-->
 
 | Setting             | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
@@ -52,7 +59,7 @@ tap-zoom --about --format=markdown
 | client_id           | True     | None    | The OAuth application's Client ID. |
 | client_secret       | True     | None    | The OAuth application's Client Secret. |
 | api_url             | False    | None    | Override the url for the API service. |
-| stream_config       | False    | None    | A list of dictionaries for specifing additional configurations for a specified stream. |
+| stream_config       | False    | None    | Specify additional configurations for a specified stream |
 
 A full list of supported settings and capabilities for this tap is available by running:
 
@@ -62,23 +69,21 @@ tap-zoom --about
 
 ### Settings for Specific Streams
 
-Settings can be added on a per-stream basis and can be set using the stream_config setting. The stream_config setting takes a list of dictionaries, requiring the stream name as a value in the stream key. If the same stream name is added multiple times, only the last will be used.
+Settings can be added on a per-stream basis and can be set using the stream_config setting. The stream_config setting takes a dictionary with the stream name as the key and supports the following configuration options:
 
 | Setting             | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
-| stream              | True     | None    | Name of the stream to configure |
 | parameters          | False    | None    | URL query string to send to the stream endpoint |
 
 Example:
 
 ```json
 {
-    "stream_config": [
-        {
-            "stream": "STREAM_NAME",
-            "parameters": "URL_QUERY_STRING"
+    "stream_config": {
+        "users": {
+            "parameters": "?status=active"
         }
-    ]
+    }
 }
 ```
 
