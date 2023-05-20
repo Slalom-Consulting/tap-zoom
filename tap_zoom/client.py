@@ -25,7 +25,7 @@ class ZoomStream(RESTStream):
         return self.config.get("api_url", DEFAULT_URL)
 
     @property
-    @cached  # type: ignore
+    @cached  # type: ignore[override]
     def authenticator(self) -> ZoomOAuthAuthenticator:
         """Return a new authenticator object.
 
