@@ -6,6 +6,7 @@ from typing import Any
 from urllib.parse import parse_qsl
 
 from memoization import cached
+from memoization import cached
 from singer_sdk.pagination import BaseAPIPaginator
 from singer_sdk.streams import RESTStream
 
