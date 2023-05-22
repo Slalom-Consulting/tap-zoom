@@ -42,25 +42,17 @@ class TapZoom(Tap):
         ),
         th.Property(
             "stream_config",
-            th.ArrayType(
-                th.PropertiesList(
-                    th.Property(
-                        "stream",
-                        th.StringType,
-                        required=True,
-                        description="Name of stream to apply a custom configuration.",
-                    ),
+            th.ObjectType(
+                additional_properties=th.ObjectType(
                     th.Property(
                         "parameters",
                         th.StringType,
-                        description=(
-                            "URL formatted parameters string " "to be used for stream."
-                        ),
+                        description="URL formatted parameters string to \
+                            be used for stream.",
                     ),
-                ),
+                )
             ),
-            description="A list of dictionaries for specifing additional \
-            configurations for a specified stream.",
+            description="Custom configuration for streams.",
         ),
     ).to_dict()
 
